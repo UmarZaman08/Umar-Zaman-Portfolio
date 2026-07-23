@@ -478,15 +478,15 @@ function Portfolio() {
 
           <div className="mt-10 flex items-center justify-center gap-3">
             {[
-              { icon: Github, href: "https://github.com", label: "GitHub" },
-              { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+              { icon: Github, href: "https://github.com/UmarZaman08", label: "GitHub" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-umar-zaman/", label: "LinkedIn" },
               { icon: Mail, href: "mailto:umar.zaman6490@gmail.com", label: "Email" },
             ].map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 aria-label={label}
                 className="grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/5 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-[#00E5FF]/60 hover:text-[#00E5FF]"
               >
