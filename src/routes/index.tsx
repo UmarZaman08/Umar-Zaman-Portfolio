@@ -314,39 +314,42 @@ function Portfolio() {
           <ul className="space-y-12">
             {EXPERIENCE.map((e, i) => (
               <li key={e.company} className="relative md:grid md:grid-cols-2 md:gap-12">
-                <div
-                  className={`md:col-span-1 ${
-                    i % 2 === 0 ? "md:pr-12 md:text-right" : "md:col-start-2 md:pl-12"
-                  }`}
-                >
-                  <div className="pl-12 md:pl-0">
-                    <span className="inline-block rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/5 px-3 py-1 text-xs font-medium text-[#00E5FF]">
-                      {e.period}
-                    </span>
-                    <h3 className="mt-3 font-display text-xl font-semibold">
-                      {e.role}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">@ {e.company}</p>
-                    <ul
-                      className={`mt-4 space-y-2 text-sm text-muted-foreground ${
-                        i % 2 === 0 ? "md:ml-auto" : ""
-                      } max-w-md`}
-                    >
-                      {e.bullets.map((b) => (
-                        <li key={b} className="flex gap-2 text-left">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#00E5FF]" />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
+                <Reveal delay={i * 100}>
+                  <div
+                    className={`md:col-span-1 ${
+                      i % 2 === 0 ? "md:pr-12 md:text-right" : "md:col-start-2 md:pl-12"
+                    }`}
+                  >
+                    <div className="pl-12 md:pl-0">
+                      <span className="inline-block rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/5 px-3 py-1 text-xs font-medium text-[#00E5FF]">
+                        {e.period}
+                      </span>
+                      <h3 className="mt-3 font-display text-xl font-semibold">
+                        {e.role}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">@ {e.company}</p>
+                      <ul
+                        className={`mt-4 space-y-2 text-sm text-muted-foreground ${
+                          i % 2 === 0 ? "md:ml-auto" : ""
+                        } max-w-md`}
+                      >
+                        {e.bullets.map((b) => (
+                          <li key={b} className="flex gap-2 text-left">
+                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#00E5FF]" />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                </div>
+                </Reveal>
                 <span className="absolute left-4 top-2 grid h-4 w-4 -translate-x-1/2 place-items-center md:left-1/2">
                   <span className="absolute h-4 w-4 animate-ping rounded-full bg-[#00E5FF]/40" />
                   <span className="relative h-3 w-3 rounded-full bg-[#00E5FF] shadow-[0_0_16px_rgba(0,229,255,0.8)]" />
                 </span>
               </li>
             ))}
+
           </ul>
         </div>
       </Section>
