@@ -357,29 +357,32 @@ function Portfolio() {
       {/* SKILLS */}
       <Section id="skills" eyebrow="Toolbox" title="Core Technical Skills" icon={Sparkles}>
         <div className="grid gap-6 md:grid-cols-2">
-          {SKILLS.map((group) => {
+          {SKILLS.map((group, i) => {
             const Icon = group.icon;
             return (
-              <div key={group.title} className="glass-card glass-card-hover p-6">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-lg border border-[#00E5FF]/30 bg-[#00E5FF]/10 text-[#00E5FF]">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="font-display text-lg font-semibold">{group.title}</h3>
-                </div>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {group.items.map((s) => (
-                    <span
-                      key={s}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-[#00E5FF]/50 hover:text-[#00E5FF]"
-                    >
-                      {s}
+              <Reveal key={group.title} delay={i * 80}>
+                <div className="glass-card glass-card-hover p-6">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-lg border border-[#00E5FF]/30 bg-[#00E5FF]/10 text-[#00E5FF]">
+                      <Icon className="h-5 w-5" />
                     </span>
-                  ))}
+                    <h3 className="font-display text-lg font-semibold">{group.title}</h3>
+                  </div>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {group.items.map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-[#00E5FF]/50 hover:text-[#00E5FF]"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
+
         </div>
       </Section>
 
