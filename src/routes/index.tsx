@@ -95,32 +95,60 @@ const SKILLS: { title: string; icon: typeof Code2; items: string[] }[] = [
   },
 ];
 
-const PROJECTS = [
+const PROJECTS: {
+  title: string;
+  tag: string;
+  desc: string;
+  stack: string[];
+  payment?: string;
+  appStore?: string;
+  playStore?: string;
+}[] = [
   {
-    title: "Tech Leap",
-    tag: "SaaS Mobile Platform",
-    desc: "A scalable Salesforce-like mobile and tablet application with multi-module architecture, tenant isolation, and RBAC.",
-    stack: ["React Native", "Redux", "SaaS Architecture", "RBAC"],
+    title: "Ex Cabs Passenger App",
+    tag: "Taxi Booking · Grande Prairie, AB",
+    desc: "Premier cab service booking platform built for Grande Prairie, Alberta, providing fast booking and modern live-tracking fleet management.",
+    stack: ["React Native", "SignalR", "Google Maps", "Stripe"],
+    payment: "Stripe",
+    appStore: "https://apps.apple.com/ca/app/ex-cabs/id6778565442",
+    playStore: "https://play.google.com/store/apps/details?id=com.excab",
   },
   {
-    title: "Exiride Ecosystem",
-    tag: "Passenger & Driver Apps",
-    desc: "Ride-sharing apps featuring real-time driver tracking, native background GPS, live chat, and integrated payments.",
-    stack: ["Google Maps", "Firebase", "Native Modules", "Stripe"],
+    title: "Ex Cabs Driver App",
+    tag: "Driver Companion",
+    desc: "Real-time driver companion application for Ex Cabs featuring optimized GPS routing, ride bids, and an embedded digital earnings wallet.",
+    stack: ["React Native", "Background Location", "SignalR", "Google Maps"],
+    appStore: "https://apps.apple.com/ca/app/excabdriver/id6768571467",
+    playStore: "https://play.google.com/store/apps/details?id=com.excabdriver",
   },
   {
-    title: "Ex Cabs & Bridge City Cabs",
-    tag: "Taxi Booking",
-    desc: "Full-featured local taxi booking platforms with real-time ride distance calculations and live driver tracking.",
+    title: "Exiride Passenger App",
+    tag: "Multi-City Ride Sharing",
+    desc: "Effortless multi-city ride-sharing platform supporting instant rides, out-of-town trips, and pre-scheduled bookings.",
+    stack: ["React Native", "Firebase", "Google Maps", "Moneris"],
+    payment: "Moneris",
+    appStore: "https://apps.apple.com/ca/app/exiride/id6504408322",
+    playStore: "https://play.google.com/store/apps/details?id=com.exiride",
+  },
+  {
+    title: "Exiride Driver App",
+    tag: "Driver Utility",
+    desc: "Dynamic driver utility for real-time ride assignments, map-based fare bidding, and transparent in-app transaction processing.",
+    stack: ["React Native", "Native Modules", "SignalR", "Firebase"],
+    appStore: "https://apps.apple.com/us/app/exiride-d/id6504280117",
+    playStore: "https://play.google.com/store/apps/details?id=com.bridge_zone",
+  },
+  {
+    title: "Bridge City Cabs Passenger App",
+    tag: "Taxi Booking · Lethbridge, AB",
+    desc: "Highly reliable, 24/7 taxi booking application deployed for Lethbridge, Alberta, ensuring transparent upfront fares and comfortable user transit.",
     stack: ["React Native", "SignalR", "Google Maps", "Moneris"],
-  },
-  {
-    title: "Bridge Zones Attendance",
-    tag: "Enterprise Tracking",
-    desc: "Location-based employee tracking with background logging, geofencing, and interactive management reporting.",
-    stack: ["React Native", "Background Location", "Firebase", "REST APIs"],
+    payment: "Moneris",
+    appStore: "https://apps.apple.com/ca/app/bridge-city-cabs/id6740337991",
+    playStore: "https://play.google.com/store/apps/details?id=com.bridgecitycabs",
   },
 ];
+
 
 function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
