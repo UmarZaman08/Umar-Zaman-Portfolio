@@ -14,9 +14,12 @@ import {
   Layers,
   Cpu,
   Wrench,
-  ExternalLink,
+  Apple,
+  Play,
+  CreditCard,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -92,32 +95,60 @@ const SKILLS: { title: string; icon: typeof Code2; items: string[] }[] = [
   },
 ];
 
-const PROJECTS = [
+const PROJECTS: {
+  title: string;
+  tag: string;
+  desc: string;
+  stack: string[];
+  payment?: string;
+  appStore?: string;
+  playStore?: string;
+}[] = [
   {
-    title: "Tech Leap",
-    tag: "SaaS Mobile Platform",
-    desc: "A scalable Salesforce-like mobile and tablet application with multi-module architecture, tenant isolation, and RBAC.",
-    stack: ["React Native", "Redux", "SaaS Architecture", "RBAC"],
+    title: "Ex Cabs Passenger App",
+    tag: "Taxi Booking · Grande Prairie, AB",
+    desc: "Premier cab service booking platform built for Grande Prairie, Alberta, providing fast booking and modern live-tracking fleet management.",
+    stack: ["React Native", "SignalR", "Google Maps", "Stripe"],
+    payment: "Stripe",
+    appStore: "https://apps.apple.com/ca/app/ex-cabs/id6778565442",
+    playStore: "https://play.google.com/store/apps/details?id=com.excab",
   },
   {
-    title: "Exiride Ecosystem",
-    tag: "Passenger & Driver Apps",
-    desc: "Ride-sharing apps featuring real-time driver tracking, native background GPS, live chat, and integrated payments.",
-    stack: ["Google Maps", "Firebase", "Native Modules", "Stripe"],
+    title: "Ex Cabs Driver App",
+    tag: "Driver Companion",
+    desc: "Real-time driver companion application for Ex Cabs featuring optimized GPS routing, ride bids, and an embedded digital earnings wallet.",
+    stack: ["React Native", "Background Location", "SignalR", "Google Maps"],
+    appStore: "https://apps.apple.com/ca/app/excabdriver/id6768571467",
+    playStore: "https://play.google.com/store/apps/details?id=com.excabdriver",
   },
   {
-    title: "Ex Cabs & Bridge City Cabs",
-    tag: "Taxi Booking",
-    desc: "Full-featured local taxi booking platforms with real-time ride distance calculations and live driver tracking.",
+    title: "Exiride Passenger App",
+    tag: "Multi-City Ride Sharing",
+    desc: "Effortless multi-city ride-sharing platform supporting instant rides, out-of-town trips, and pre-scheduled bookings.",
+    stack: ["React Native", "Firebase", "Google Maps", "Moneris"],
+    payment: "Moneris",
+    appStore: "https://apps.apple.com/ca/app/exiride/id6504408322",
+    playStore: "https://play.google.com/store/apps/details?id=com.exiride",
+  },
+  {
+    title: "Exiride Driver App",
+    tag: "Driver Utility",
+    desc: "Dynamic driver utility for real-time ride assignments, map-based fare bidding, and transparent in-app transaction processing.",
+    stack: ["React Native", "Native Modules", "SignalR", "Firebase"],
+    appStore: "https://apps.apple.com/us/app/exiride-d/id6504280117",
+    playStore: "https://play.google.com/store/apps/details?id=com.bridge_zone",
+  },
+  {
+    title: "Bridge City Cabs Passenger App",
+    tag: "Taxi Booking · Lethbridge, AB",
+    desc: "Highly reliable, 24/7 taxi booking application deployed for Lethbridge, Alberta, ensuring transparent upfront fares and comfortable user transit.",
     stack: ["React Native", "SignalR", "Google Maps", "Moneris"],
-  },
-  {
-    title: "Bridge Zones Attendance",
-    tag: "Enterprise Tracking",
-    desc: "Location-based employee tracking with background logging, geofencing, and interactive management reporting.",
-    stack: ["React Native", "Background Location", "Firebase", "REST APIs"],
+    payment: "Moneris",
+    appStore: "https://apps.apple.com/ca/app/bridge-city-cabs/id6740337991",
+    playStore: "https://play.google.com/store/apps/details?id=com.bridgecitycabs",
   },
 ];
+
 
 function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
@@ -283,39 +314,42 @@ function Portfolio() {
           <ul className="space-y-12">
             {EXPERIENCE.map((e, i) => (
               <li key={e.company} className="relative md:grid md:grid-cols-2 md:gap-12">
-                <div
-                  className={`md:col-span-1 ${
-                    i % 2 === 0 ? "md:pr-12 md:text-right" : "md:col-start-2 md:pl-12"
-                  }`}
-                >
-                  <div className="pl-12 md:pl-0">
-                    <span className="inline-block rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/5 px-3 py-1 text-xs font-medium text-[#00E5FF]">
-                      {e.period}
-                    </span>
-                    <h3 className="mt-3 font-display text-xl font-semibold">
-                      {e.role}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">@ {e.company}</p>
-                    <ul
-                      className={`mt-4 space-y-2 text-sm text-muted-foreground ${
-                        i % 2 === 0 ? "md:ml-auto" : ""
-                      } max-w-md`}
-                    >
-                      {e.bullets.map((b) => (
-                        <li key={b} className="flex gap-2 text-left">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#00E5FF]" />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
+                <Reveal delay={i * 100}>
+                  <div
+                    className={`md:col-span-1 ${
+                      i % 2 === 0 ? "md:pr-12 md:text-right" : "md:col-start-2 md:pl-12"
+                    }`}
+                  >
+                    <div className="pl-12 md:pl-0">
+                      <span className="inline-block rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/5 px-3 py-1 text-xs font-medium text-[#00E5FF]">
+                        {e.period}
+                      </span>
+                      <h3 className="mt-3 font-display text-xl font-semibold">
+                        {e.role}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">@ {e.company}</p>
+                      <ul
+                        className={`mt-4 space-y-2 text-sm text-muted-foreground ${
+                          i % 2 === 0 ? "md:ml-auto" : ""
+                        } max-w-md`}
+                      >
+                        {e.bullets.map((b) => (
+                          <li key={b} className="flex gap-2 text-left">
+                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#00E5FF]" />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                </div>
+                </Reveal>
                 <span className="absolute left-4 top-2 grid h-4 w-4 -translate-x-1/2 place-items-center md:left-1/2">
                   <span className="absolute h-4 w-4 animate-ping rounded-full bg-[#00E5FF]/40" />
                   <span className="relative h-3 w-3 rounded-full bg-[#00E5FF] shadow-[0_0_16px_rgba(0,229,255,0.8)]" />
                 </span>
               </li>
             ))}
+
           </ul>
         </div>
       </Section>
@@ -323,63 +357,98 @@ function Portfolio() {
       {/* SKILLS */}
       <Section id="skills" eyebrow="Toolbox" title="Core Technical Skills" icon={Sparkles}>
         <div className="grid gap-6 md:grid-cols-2">
-          {SKILLS.map((group) => {
+          {SKILLS.map((group, i) => {
             const Icon = group.icon;
             return (
-              <div key={group.title} className="glass-card glass-card-hover p-6">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-lg border border-[#00E5FF]/30 bg-[#00E5FF]/10 text-[#00E5FF]">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="font-display text-lg font-semibold">{group.title}</h3>
-                </div>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {group.items.map((s) => (
-                    <span
-                      key={s}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-[#00E5FF]/50 hover:text-[#00E5FF]"
-                    >
-                      {s}
+              <Reveal key={group.title} delay={i * 80}>
+                <div className="glass-card glass-card-hover p-6">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-lg border border-[#00E5FF]/30 bg-[#00E5FF]/10 text-[#00E5FF]">
+                      <Icon className="h-5 w-5" />
                     </span>
-                  ))}
+                    <h3 className="font-display text-lg font-semibold">{group.title}</h3>
+                  </div>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {group.items.map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-[#00E5FF]/50 hover:text-[#00E5FF]"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
+
         </div>
       </Section>
 
       {/* PROJECTS */}
       <Section id="projects" eyebrow="Selected Work" title="Key Projects" icon={Layers}>
         <div className="grid gap-6 md:grid-cols-2">
-          {PROJECTS.map((p) => (
-            <article key={p.title} className="glass-card glass-card-hover group p-6 sm:p-8">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-[#00E5FF]">
-                    {p.tag}
-                  </p>
-                  <h3 className="mt-2 font-display text-2xl font-semibold">
-                    {p.title}
-                  </h3>
+          {PROJECTS.map((p, i) => (
+            <Reveal key={p.title} delay={i * 80}>
+              <article className="glass-card glass-card-hover group flex h-full flex-col p-6 sm:p-8">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-[#00E5FF]">
+                      {p.tag}
+                    </p>
+                    <h3 className="mt-2 font-display text-2xl font-semibold">
+                      {p.title}
+                    </h3>
+                  </div>
+                  {p.payment && (
+                    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/5 px-2.5 py-1 text-[11px] font-medium text-[#00E5FF]">
+                      <CreditCard className="h-3 w-3" />
+                      {p.payment}
+                    </span>
+                  )}
                 </div>
-                <ExternalLink className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-[#00E5FF]" />
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                {p.desc}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {p.stack.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </article>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  {p.desc}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {p.stack.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-6 flex flex-wrap gap-2 pt-2">
+                  {p.appStore && (
+                    <a
+                      href={p.appStore}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:border-[#00E5FF]/50 hover:text-[#00E5FF]"
+                    >
+                      <Apple className="h-3.5 w-3.5" />
+                      App Store
+                    </a>
+                  )}
+                  {p.playStore && (
+                    <a
+                      href={p.playStore}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:border-[#00E5FF]/50 hover:text-[#00E5FF]"
+                    >
+                      <Play className="h-3.5 w-3.5" />
+                      Google Play
+                    </a>
+                  )}
+                </div>
+              </article>
+            </Reveal>
           ))}
+
         </div>
       </Section>
 
@@ -415,15 +484,15 @@ function Portfolio() {
 
           <div className="mt-10 flex items-center justify-center gap-3">
             {[
-              { icon: Github, href: "https://github.com", label: "GitHub" },
-              { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+              { icon: Github, href: "https://github.com/UmarZaman08", label: "GitHub" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-umar-zaman/", label: "LinkedIn" },
               { icon: Mail, href: "mailto:umar.zaman6490@gmail.com", label: "Email" },
             ].map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 aria-label={label}
                 className="grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/5 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-[#00E5FF]/60 hover:text-[#00E5FF]"
               >
@@ -474,3 +543,53 @@ function Section({
     </section>
   );
 }
+
+function Reveal({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setVisible(true);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        transition:
+          "opacity 500ms ease-out, transform 500ms cubic-bezier(0.22, 1, 0.36, 1)",
+        transitionDelay: `${delay}ms`,
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(16px)",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+
