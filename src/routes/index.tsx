@@ -383,34 +383,66 @@ function Portfolio() {
       {/* PROJECTS */}
       <Section id="projects" eyebrow="Selected Work" title="Key Projects" icon={Layers}>
         <div className="grid gap-6 md:grid-cols-2">
-          {PROJECTS.map((p) => (
-            <article key={p.title} className="glass-card glass-card-hover group p-6 sm:p-8">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-[#00E5FF]">
-                    {p.tag}
-                  </p>
-                  <h3 className="mt-2 font-display text-2xl font-semibold">
-                    {p.title}
-                  </h3>
+          {PROJECTS.map((p, i) => (
+            <Reveal key={p.title} delay={i * 80}>
+              <article className="glass-card glass-card-hover group flex h-full flex-col p-6 sm:p-8">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-[#00E5FF]">
+                      {p.tag}
+                    </p>
+                    <h3 className="mt-2 font-display text-2xl font-semibold">
+                      {p.title}
+                    </h3>
+                  </div>
+                  {p.payment && (
+                    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/5 px-2.5 py-1 text-[11px] font-medium text-[#00E5FF]">
+                      <CreditCard className="h-3 w-3" />
+                      {p.payment}
+                    </span>
+                  )}
                 </div>
-                <ExternalLink className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-[#00E5FF]" />
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                {p.desc}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {p.stack.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </article>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  {p.desc}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {p.stack.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-6 flex flex-wrap gap-2 pt-2">
+                  {p.appStore && (
+                    <a
+                      href={p.appStore}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:border-[#00E5FF]/50 hover:text-[#00E5FF]"
+                    >
+                      <Apple className="h-3.5 w-3.5" />
+                      App Store
+                    </a>
+                  )}
+                  {p.playStore && (
+                    <a
+                      href={p.playStore}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:border-[#00E5FF]/50 hover:text-[#00E5FF]"
+                    >
+                      <Play className="h-3.5 w-3.5" />
+                      Google Play
+                    </a>
+                  )}
+                </div>
+              </article>
+            </Reveal>
           ))}
+
         </div>
       </Section>
 
