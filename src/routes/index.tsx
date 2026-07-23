@@ -207,18 +207,12 @@ function Portfolio() {
             ))}
           </ul>
 
-          {/* <a
-            href={resumeAsset.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            download="Muhammad_Umar_Zaman_Resume.pdf"
-            className="hidden md:inline-flex items-center gap-2 rounded-full border border-[#00E5FF]/60 bg-[#00E5FF]/5 px-4 py-2 text-sm font-medium text-[#00E5FF] transition-all hover:bg-[#00E5FF]/15 hover:shadow-[0_0_24px_-4px_rgba(0,229,255,0.5)]"
-          > */}
             <a
               href="/Muhammad_Umar_Zaman_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               download
+              className="hidden md:inline-flex items-center gap-2 rounded-full border border-[#00E5FF]/60 bg-[#00E5FF]/5 px-4 py-2 text-sm font-medium text-[#00E5FF] transition-all hover:bg-[#00E5FF]/15 hover:shadow-[0_0_24px_-4px_rgba(0,229,255,0.5)]"
             >
             <Download className="h-4 w-4" />
             Download Resume
@@ -248,19 +242,12 @@ function Portfolio() {
                 </li>
               ))}
               <li>
-                {/* <a
-                  href={resumeAsset.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="Muhammad_Umar_Zaman_Resume.pdf"
-                  onClick={() => setMenuOpen(false)}
-                  className="mt-2 inline-flex items-center gap-2 rounded-full border border-[#00E5FF]/60 px-4 py-2 text-sm font-medium text-[#00E5FF]"
-                > */}
                 <a
                   href="/Muhammad_Umar_Zaman_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   download
+                  className="hidden md:inline-flex items-center gap-2 rounded-full border border-[#00E5FF]/60 bg-[#00E5FF]/5 px-4 py-2 text-sm font-medium text-[#00E5FF] transition-all hover:bg-[#00E5FF]/15 hover:shadow-[0_0_24px_-4px_rgba(0,229,255,0.5)]"
                 >
                   <Download className="h-4 w-4" /> Download Resume
                 </a>
@@ -341,7 +328,6 @@ function Portfolio() {
             <div className="pointer-events-none absolute -inset-6 rounded-full bg-[radial-gradient(circle_at_center,rgba(0,229,255,0.35),transparent_65%)] blur-2xl" />
             <div className="relative aspect-square overflow-hidden rounded-[2rem] border border-[#00E5FF]/40 bg-[#1F1F23] shadow-[0_0_60px_-10px_rgba(0,229,255,0.5),inset_0_0_0_1px_rgba(255,255,255,0.05)]">
               <img
-                {/* src={profileAsset.url} */}
                 src="/Profile(1).png"
                 alt="Muhammad Umar Zaman"
                 className="h-full w-full object-cover"
