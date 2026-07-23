@@ -17,9 +17,14 @@ import {
   Apple,
   Play,
   CreditCard,
+  ShieldCheck,
+  Gauge,
+  Radio,
+  Boxes,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
+import resumeAsset from "@/assets/resume.pdf.asset.json";
+import profileAsset from "@/assets/profile.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -63,6 +68,13 @@ const EXPERIENCE = [
       "Solved real-world technical problems shipped into client applications.",
     ],
   },
+];
+
+const FOCUS_PILLARS = [
+  { icon: Boxes, title: "SaaS Architecture", desc: "Multi-tenant, modular systems built to scale." },
+  { icon: ShieldCheck, title: "Mobile Security", desc: "RBAC, secure storage, hardened auth flows." },
+  { icon: Gauge, title: "Core Performance", desc: "Native modules & tuned render pipelines." },
+  { icon: Radio, title: "Real-time Sync", desc: "SignalR, sockets & background GPS tracking." },
 ];
 
 const SKILLS: { title: string; icon: typeof Code2; items: string[] }[] = [
@@ -195,7 +207,10 @@ function Portfolio() {
           </ul>
 
           <a
-            href="#contact"
+            href={resumeAsset.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            download="Muhammad_Umar_Zaman_Resume.pdf"
             className="hidden md:inline-flex items-center gap-2 rounded-full border border-[#00E5FF]/60 bg-[#00E5FF]/5 px-4 py-2 text-sm font-medium text-[#00E5FF] transition-all hover:bg-[#00E5FF]/15 hover:shadow-[0_0_24px_-4px_rgba(0,229,255,0.5)]"
           >
             <Download className="h-4 w-4" />
@@ -227,7 +242,10 @@ function Portfolio() {
               ))}
               <li>
                 <a
-                  href="#contact"
+                  href={resumeAsset.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="Muhammad_Umar_Zaman_Resume.pdf"
                   onClick={() => setMenuOpen(false)}
                   className="mt-2 inline-flex items-center gap-2 rounded-full border border-[#00E5FF]/60 px-4 py-2 text-sm font-medium text-[#00E5FF]"
                 >
@@ -242,8 +260,8 @@ function Portfolio() {
       {/* HERO */}
       <section id="home" className="relative overflow-hidden grid-bg pt-32 pb-24 lg:pt-44 lg:pb-32">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0A0A0C]" />
-        <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="animate-fade-in max-w-4xl">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 lg:grid-cols-[1.4fr_1fr] lg:gap-16 lg:px-8">
+          <div className="animate-fade-in">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-muted-foreground backdrop-blur">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00E5FF] opacity-75" />
@@ -304,53 +322,111 @@ function Portfolio() {
               ))}
             </dl>
           </div>
+
+          {/* PROFILE IMAGE */}
+          <div className="relative mx-auto w-full max-w-sm lg:max-w-md animate-fade-in">
+            <div className="pointer-events-none absolute -inset-6 rounded-full bg-[radial-gradient(circle_at_center,rgba(0,229,255,0.35),transparent_65%)] blur-2xl" />
+            <div className="relative aspect-square overflow-hidden rounded-[2rem] border border-[#00E5FF]/40 bg-[#1F1F23] shadow-[0_0_60px_-10px_rgba(0,229,255,0.5),inset_0_0_0_1px_rgba(255,255,255,0.05)]">
+              <img
+                src={profileAsset.url}
+                alt="Muhammad Umar Zaman"
+                className="h-full w-full object-cover"
+                loading="eager"
+              />
+              <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-[#00E5FF]/30" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0A0A0C]/70 to-transparent" />
+            </div>
+            <div className="pointer-events-none absolute -bottom-3 -right-3 h-24 w-24 rounded-full border border-[#00E5FF]/40 bg-[#00E5FF]/5 backdrop-blur" />
+            <div className="pointer-events-none absolute -top-3 -left-3 h-16 w-16 rounded-2xl border border-[#00E5FF]/30" />
+          </div>
         </div>
       </section>
 
       {/* EXPERIENCE */}
       <Section id="experience" eyebrow="Career" title="Professional Experience" icon={Briefcase}>
-        <div className="relative mx-auto max-w-4xl">
-          <div className="absolute bottom-0 left-4 top-0 w-px bg-gradient-to-b from-[#00E5FF]/60 via-white/10 to-transparent md:left-1/2" />
-          <ul className="space-y-12">
-            {EXPERIENCE.map((e, i) => (
-              <li key={e.company} className="relative md:grid md:grid-cols-2 md:gap-12">
-                <Reveal delay={i * 100}>
-                  <div
-                    className={`md:col-span-1 ${
-                      i % 2 === 0 ? "md:pr-12 md:text-right" : "md:col-start-2 md:pl-12"
-                    }`}
-                  >
-                    <div className="pl-12 md:pl-0">
-                      <span className="inline-block rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/5 px-3 py-1 text-xs font-medium text-[#00E5FF]">
-                        {e.period}
-                      </span>
-                      <h3 className="mt-3 font-display text-xl font-semibold">
-                        {e.role}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">@ {e.company}</p>
-                      <ul
-                        className={`mt-4 space-y-2 text-sm text-muted-foreground ${
-                          i % 2 === 0 ? "md:ml-auto" : ""
-                        } max-w-md`}
-                      >
-                        {e.bullets.map((b) => (
-                          <li key={b} className="flex gap-2 text-left">
-                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#00E5FF]" />
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </Reveal>
-                <span className="absolute left-4 top-2 grid h-4 w-4 -translate-x-1/2 place-items-center md:left-1/2">
-                  <span className="absolute h-4 w-4 animate-ping rounded-full bg-[#00E5FF]/40" />
-                  <span className="relative h-3 w-3 rounded-full bg-[#00E5FF] shadow-[0_0_16px_rgba(0,229,255,0.8)]" />
-                </span>
-              </li>
-            ))}
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+          {/* Timeline */}
+          <div className="relative">
+            <div className="absolute bottom-0 left-4 top-0 w-px bg-gradient-to-b from-[#00E5FF]/60 via-white/10 to-transparent" />
+            <ul className="space-y-10">
+              {EXPERIENCE.map((e, i) => (
+                <li key={e.company} className="relative pl-12">
+                  <span className="absolute left-4 top-2 grid h-4 w-4 -translate-x-1/2 place-items-center">
+                    <span className="absolute h-4 w-4 animate-ping rounded-full bg-[#00E5FF]/40" />
+                    <span className="relative h-3 w-3 rounded-full bg-[#00E5FF] shadow-[0_0_16px_rgba(0,229,255,0.8)]" />
+                  </span>
+                  <Reveal delay={i * 100}>
+                    <span className="inline-block rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/5 px-3 py-1 text-xs font-medium text-[#00E5FF]">
+                      {e.period}
+                    </span>
+                    <h3 className="mt-3 font-display text-xl font-semibold">{e.role}</h3>
+                    <p className="text-sm text-muted-foreground">@ {e.company}</p>
+                    <ul className="mt-4 max-w-md space-y-2 text-sm text-muted-foreground">
+                      {e.bullets.map((b) => (
+                        <li key={b} className="flex gap-2">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#00E5FF]" />
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          </ul>
+          {/* Engineering Focus Chart - sticky on desktop */}
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <Reveal>
+              <div className="glass-card relative overflow-hidden p-6 sm:p-8">
+                <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#00E5FF]/10 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-20 -left-10 h-52 w-52 rounded-full bg-[#00E5FF]/5 blur-3xl" />
+                <div className="relative">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/5 px-3 py-1 text-xs font-medium text-[#00E5FF]">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Engineering Focus
+                  </div>
+                  <h3 className="mt-4 font-display text-2xl font-semibold">
+                    Core Pillars of My Craft
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    The disciplines I obsess over across every production mobile
+                    build.
+                  </p>
+
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    {FOCUS_PILLARS.map((p, i) => {
+                      const Icon = p.icon;
+                      return (
+                        <Reveal key={p.title} delay={i * 80}>
+                          <div className="group relative rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-all hover:border-[#00E5FF]/40 hover:bg-[#00E5FF]/[0.04]">
+                            <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#00E5FF]/30 bg-[#00E5FF]/10 text-[#00E5FF] transition-transform group-hover:scale-110">
+                              <Icon className="h-4 w-4" />
+                            </span>
+                            <h4 className="mt-3 text-sm font-semibold">{p.title}</h4>
+                            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                              {p.desc}
+                            </p>
+                          </div>
+                        </Reveal>
+                      );
+                    })}
+                  </div>
+
+                  <div className="mt-6 flex items-center justify-between rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-2">
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00E5FF] opacity-75" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00E5FF]" />
+                      </span>
+                      Live systems in production
+                    </span>
+                    <span className="font-mono text-[#00E5FF]">99.9% uptime</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </Section>
 
@@ -505,7 +581,6 @@ function Portfolio() {
         <footer className="relative mx-auto mt-20 max-w-7xl border-t border-white/5 px-5 pt-8 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground sm:flex-row">
             <p>© {new Date().getFullYear()} Muhammad Umar Zaman. All rights reserved.</p>
-            <p>Crafted with React, Tailwind & attention to detail.</p>
           </div>
         </footer>
       </section>
@@ -591,5 +666,3 @@ function Reveal({
     </div>
   );
 }
-
-
