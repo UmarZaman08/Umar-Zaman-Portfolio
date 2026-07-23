@@ -14,9 +14,12 @@ import {
   Layers,
   Cpu,
   Wrench,
-  ExternalLink,
+  Apple,
+  Play,
+  CreditCard,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
