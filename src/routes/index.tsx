@@ -23,8 +23,10 @@ import {
   Boxes,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import resumeAsset from "@/assets/resume.pdf.asset.json";
-import profileAsset from "@/assets/profile.png.asset.json";
+// import resumeAsset from "@/assets/resume.pdf.asset.json";
+// import profileAsset from "@/assets/profile.png.asset.json";
+import resumeAsset from "@/public/Profile(1).png";
+import profileAsset from "@/public/Muhammad_Umar_Zaman_Resume.pdf";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
