@@ -541,13 +541,11 @@ function Section({
 function Reveal({
   children,
   delay = 0,
-  as: Tag = "div",
 }: {
   children: React.ReactNode;
   delay?: number;
-  as?: keyof React.JSX.IntrinsicElements;
 }) {
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -573,8 +571,8 @@ function Reveal({
   }, []);
 
   return (
-    <Tag
-      ref={ref as never}
+    <div
+      ref={ref}
       style={{
         transition:
           "opacity 500ms ease-out, transform 500ms cubic-bezier(0.22, 1, 0.36, 1)",
@@ -584,7 +582,8 @@ function Reveal({
       }}
     >
       {children}
-    </Tag>
+    </div>
   );
 }
+
 
